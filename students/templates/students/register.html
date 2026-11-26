@@ -1,0 +1,65 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Student</title>
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+</head>
+
+<body class="register-page">
+
+    <header class="register-header">
+        <div class="register-header-icon">🎓</div>
+        <h1>Register New Student</h1>
+        <p>Add a student's information to the system.</p>
+    </header>
+
+    <main class="register-main">
+
+        <section class="register-card">
+
+            <div class="register-card-heading">
+                <h2>Student Information</h2>
+                <p>Please fill in the details below.</p>
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="register-form-group">
+                    <label>Student ID</label>
+                    <input type="text" name="student_id"
+                           placeholder="Enter student ID" required>
+                </div>
+
+                <div class="register-form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name"
+                           placeholder="Enter full name" required>
+                </div>
+
+                <div class="register-form-group">
+                    <label>Course</label>
+                    <input type="text" name="course"
+                           placeholder="Enter course of study" required>
+                </div>
+
+                <button type="submit" class="register-submit">
+                    Register Student
+                </button>
+            </form>
+
+            <a href="{% url 'dashboard' %}" class="register-back">
+                ← Back to Dashboard
+            </a>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

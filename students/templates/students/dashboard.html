@@ -1,0 +1,248 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="dashboard-page">
+
+<div class="dashboard-layout">
+
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">🎓</span>
+            <h2>Student Portal</h2>
+            <p>Management System</p>
+        </div>
+
+        <p class="menu-heading">MAIN MENU</p>
+
+        
+<nav class="sidebar-nav">
+
+    <a href="{% url 'dashboard' %}" class="active">
+        <i data-lucide="layout-dashboard"></i> Dashboard
+    </a>
+
+    <a href="{% url 'register' %}">
+        <i data-lucide="user-plus"></i> Register Student
+    </a>
+
+    <a href="{% url 'view_students' %}">
+        <i data-lucide="users"></i> View Students
+    </a>
+
+    <a href="{% url 'search_student' %}">
+        <i data-lucide="search"></i> Search Student
+    </a>
+
+    <a href="{% url 'update_student' %}">
+        <i data-lucide="user-pen"></i> Update Student
+    </a>
+
+    <a href="{% url 'delete_student' %}">
+        <i data-lucide="user-x"></i> Delete Student
+    </a>
+
+    <a href="{% url 'record_score' %}">
+        <i data-lucide="graduation-cap"></i> Record Scores
+    </a>
+
+    <a href="{% url 'export_students' %}">
+        <i data-lucide="file-spreadsheet"></i> Export Records
+    </a>
+
+    <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="logout-button">
+            <i data-lucide="log-out"></i> Logout
+        </button>
+    </form>
+
+</nav>
+
+
+        <div class="sidebar-footer">
+            <p>Student Management System</p>
+            <small>Academic Records Portal</small>
+        </div>
+    </aside>
+
+
+    <main class="main-content">
+        {% if messages %}
+    {% for message in messages %}
+        <div class="success-message">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+        <header class="topbar">
+            <div>
+                <h1>Dashboard</h1>
+                <p>Welcome back! Manage your academic records.</p>
+            </div>
+            <div class="topbar-icon">🎓</div>
+        </header>
+
+
+        <section class="welcome">
+            <h2>Welcome to Your Dashboard</h2>
+            <p>Manage student information, academic records and results from one place.</p>
+        </section>
+
+
+        <section class="card-container">
+
+            <div class="card stat-card">
+                <span class="stat-icon">👥</span>
+                <h3>Total Students</h3>
+                <h2>{{ total_students }}</h2>
+            </div>
+
+            <div class="card stat-card">
+                <span class="stat-icon">📚</span>
+                <h3>Total Courses</h3>
+                <h2>{{ total_courses }}</h2>
+            </div>
+
+            <div class="card stat-card">
+                <span class="stat-icon">📊</span>
+                <h3>Total Scores Recorded</h3>
+                <h2>{{ total_scores }}</h2>
+            </div>
+
+        </section>
+
+
+        <section class="management">
+            <h2>Student Management</h2>
+            <p class="section-description">Choose an operation to continue.</p>
+
+            <div class="card-container">
+
+                <div class="card">
+    <span class="action-icon">
+        <i data-lucide="user-plus"></i>
+    </span>
+
+    <h3>Register Student</h3>
+    <p>Add a new student to the system.</p>
+    <a href="{% url 'register' %}">Get Started →</a>
+</div>
+
+                <div class="card">
+                    <span class="action-icon">
+                        <i data-lucide="users"></i>
+                    </span>
+                    <h3>View Students</h3>
+                    <p>View all registered students.</p>
+                    <a href="{% url 'view_students' %}">View Records →</a>
+                </div>
+
+                <div class="card">
+                    <span class="action-icon">
+                        <i data-lucide="search"></i>
+                    </span>
+                    <h3>Search Student</h3>
+                    <p>Find a student using their ID.</p>
+                    <a href="{% url 'search_student' %}">Search Now →</a>
+                </div>
+
+                <div class="card">
+                    <span class="action-icon">
+                        <i data-lucide="user-pen"></i>
+                    </span>
+                    <h3>Update Student</h3>
+                    <p>Modify existing student information.</p>
+                    <a href="{% url 'update_student' %}">Update Records →</a>
+                </div>
+
+                <div class="card">
+                    <span class="action-icon">
+                        <i data-lucide="trash-2"></i>
+                    </span>
+                    <h3>Delete Student</h3>
+                    <p>Remove a student record.</p>
+                    <a href="{% url 'delete_student' %}">Manage Records →</a>
+                </div>
+
+                <div class="card">
+                    <span class="action-icon">
+                        <i data-lucide="bar-chart-2"></i>
+                    </span>
+                    <h3>Record Scores</h3>
+                    <p>Enter and manage student scores.</p>
+                    <a href="{% url 'record_score' %}">Record Scores →</a>
+                </div>
+
+                <div class="card">
+                    <span class="action-icon">
+                        <i data-lucide="download"></i>
+                    </span>
+                    <h3>Export Records</h3>
+                    <p>Export student information to CSV.</p>
+                    <a href="{% url 'export_students' %}">Export Data →</a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="management recent-section">
+            <h2>Recent Students</h2>
+
+            <input
+                type="text"
+                id="studentSearch"
+                placeholder="Search by ID, name or course..."
+                class="search-box"
+            >
+
+            {% if recent_students %}
+                <div class="table-container">
+                    <table id="studentsTable">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Full Name</th>
+                                <th>Course</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for student in recent_students %}
+                            <tr>
+                                <td>{{ student.student_id }}</td>
+                                <td>{{ student.name }}</td>
+                                <td>{{ student.course }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p>No students registered yet.</p>
+            {% endif %}
+        </section>
+
+
+        <footer class="footer">
+            <p>Student Management System | Academic Record Management</p>
+        </footer>
+
+    </main>
+</div>
+
+<script src="{% static 'students/script.js' %}"></script>
+
+</body>
+</html>

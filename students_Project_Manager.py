@@ -222,7 +222,7 @@ def export_csv():
                 student.student_id,
                 student.name,
                 student.age,
-                student.course,
+                student.course,     
                 student.scores,
                 round(student.average(), 2),
                 student.grade()

@@ -1,0 +1,86 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Record Scores | Student Management System</title>
+
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="score-page">
+
+    <header class="score-header">
+        <div class="score-header-icon">
+            <i data-lucide="graduation-cap"></i>
+        </div>
+        <h1>Record Student Scores</h1>
+        <p>Add academic scores to student records.</p>
+    </header>
+
+    <main class="score-main">
+        <section class="score-card">
+
+            <div class="score-card-heading">
+                <i data-lucide="clipboard-pen"></i>
+                <h2>Enter Student Score</h2>
+                <p>Provide the student's ID and academic score below.</p>
+            </div>
+
+            {% if success %}
+                <div class="score-success">
+                    {{ success }}
+                </div>
+            {% endif %}
+
+            {% if error %}
+                <div class="score-error">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="score-form-group">
+                    <label>Student ID</label>
+                    <input type="text" name="student_id"
+                           placeholder="Enter student ID" required>
+                </div>
+
+                <div class="score-form-group">
+                    <label>Score (0–100)</label>
+                    <input type="number" name="score"
+                           placeholder="Enter score"
+                           min="0" max="100" step="0.01" required>
+                </div>
+
+                <div class="score-info">
+                    <i data-lucide="info"></i>
+                    <p>Scores must be between 0 and 100.</p>
+                </div>
+
+                <button type="submit" class="score-submit">
+                    <i data-lucide="save"></i>
+                    Save Score
+                </button>
+            </form>
+
+            <a href="{% url 'dashboard' %}" class="score-back">
+                <i data-lucide="arrow-left"></i>
+                Back to Dashboard
+            </a>
+
+        </section>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Student</title>
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="search-page">
+
+    <header class="search-header">
+        <div class="search-header-icon">
+            <i data-lucide="search"></i>
+        </div>
+        <h1>Search Student</h1>
+        <p>Find student records using their Student ID.</p>
+    </header>
+
+    <main class="search-main">
+
+        <section class="search-card">
+
+            <h2>Search Records</h2>
+            <p class="search-description">Enter the student's ID below.</p>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="search-form-group">
+                    <label>Student ID</label>
+                    <input
+                        type="text"
+                        name="student_id"
+                        placeholder="Enter Student ID"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="search-submit">
+                    <i data-lucide="search"></i>
+                    Search Student
+                </button>
+            </form>
+
+            {% if student %}
+                <div class="student-result">
+                    <h2>
+                        <i data-lucide="user-round-check"></i>
+                        Student Details
+                    </h2>
+
+                    <div class="result-row">
+                        <strong>Student ID</strong>
+                        <span>{{ student.student_id }}</span>
+                    </div>
+
+                    <div class="result-row">
+                        <strong>Full Name</strong>
+                        <span>{{ student.name }}</span>
+                    </div>
+
+                    <div class="result-row">
+                        <strong>Course</strong>
+                        <span>{{ student.course }}</span>
+                    </div>
+
+                    <div class="result-row">
+                        <strong>Scores</strong>
+                        <span>{{ student.scores }}</span>
+                    </div>
+
+                    <div class="result-row">
+                        <strong>Average</strong>
+                        <span>{{ student.average }}</span>
+                    </div>
+
+                    <div class="result-row">
+                        <strong>Grade</strong>
+                        <span>{{ student.grade }}</span>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if error %}
+                <div class="search-error">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <a href="{% url 'dashboard' %}" class="search-back">
+                ← Back to Dashboard
+            </a>
+
+        </section>
+
+    </main>
+
+    <script>
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    </script>
+
+</body>
+</html>

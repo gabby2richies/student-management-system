@@ -1,0 +1,99 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Students</title>
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="view-page">
+
+    <header class="view-header">
+        <div class="view-header-icon">
+            <i data-lucide="users"></i>
+        </div>
+        <h1>Registered Students</h1>
+        <p>View and manage all student academic records.</p>
+    </header>
+
+    <main class="view-main">
+
+        <section class="view-card">
+
+            <div class="view-card-heading">
+                <div>
+                    <h2>Student Records</h2>
+                    <p>All registered students in the system.</p>
+                </div>
+                <span class="view-heading-icon">
+                    <i data-lucide="graduation-cap"></i>
+                </span>
+            </div>
+
+            {% if students %}
+
+            <input
+                type="text"
+                id="studentSearch"
+                class="view-search"
+                placeholder="Search by student ID, name or course..."
+            >
+
+            <div class="table-container view-table-container">
+                <table id="studentsTable">
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Full Name</th>
+                            <th>Course</th>
+                            <th>Scores</th>
+                            <th>Average</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for student in students %}
+                        <tr>
+                            <td>{{ student.student_id }}</td>
+                            <td>{{ student.name }}</td>
+                            <td>{{ student.course }}</td>
+                            <td>{{ student.scores }}</td>
+                            <td>{{ student.average }}</td>
+                            <td>{{ student.grade }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            {% else %}
+                <div class="view-empty">
+                    <i data-lucide="users"></i>
+                    <h3>No Students Yet</h3>
+                    <p>No students have been registered yet.</p>
+                </div>
+            {% endif %}
+
+            <a href="{% url 'dashboard' %}" class="view-back">
+                ← Back to Dashboard
+            </a>
+
+        </section>
+
+    </main>
+
+    <script src="{% static 'students/script.js' %}"></script>
+    <script>
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    </script>
+
+</body>
+</html>

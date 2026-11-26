@@ -1,0 +1,68 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Export Records | Student Management System</title>
+
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="export-page">
+
+    <header class="export-header">
+        <div class="export-header-icon">
+            <i data-lucide="file-spreadsheet"></i>
+        </div>
+        <h1>Export Student Records</h1>
+        <p>Download student information for external use.</p>
+    </header>
+
+    <main class="export-main">
+        <section class="export-card">
+
+            <div class="export-card-heading">
+                <i data-lucide="download"></i>
+                <h2>Download Student Records</h2>
+                <p>Export your student records into a CSV file.</p>
+            </div>
+
+            <div class="export-info">
+                <i data-lucide="info"></i>
+                <p>
+                    Your exported file can be opened and viewed
+                    using Microsoft Excel or other spreadsheet applications.
+                </p>
+            </div>
+
+            <div class="export-file">
+                <i data-lucide="file-spreadsheet"></i>
+                <div>
+                    <strong>Student Records</strong>
+                    <p>CSV Spreadsheet (.csv)</p>
+                </div>
+            </div>
+
+            <a href="{% url 'export_students' %}" class="export-submit">
+                <i data-lucide="download"></i>
+                Download CSV File
+            </a>
+
+            <a href="{% url 'dashboard' %}" class="export-back">
+                <i data-lucide="arrow-left"></i>
+                Back to Dashboard
+            </a>
+
+        </section>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>
