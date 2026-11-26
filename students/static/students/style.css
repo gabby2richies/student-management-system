@@ -341,7 +341,7 @@ tbody tr:hover {
     margin-bottom: 15px;
 }
 
-.login-container h2 {
+.login-container h1 {
     color: #111111;
     font-size: 22px;
     margin-bottom: 8px;
@@ -2191,17 +2191,7 @@ tbody tr:hover {
 .dashboard-page .footer p {
     color: #D1FAE5;
 }
-/* FUNCTION PAGE HEADING VISIBILITY FIX */
-.register-header p,
-.view-header p,
-.search-header p,
-.update-header p,
-.delete-header p,
-.score-header p,
-.export-header p {
-    color: #064E3B !important;
-    font-weight: 500;
-}
+
 /* FIX DESCRIPTION TEXT VISIBILITY ON ALL FUNCTION PAGES */
 .register-header p,
 .view-header p,
